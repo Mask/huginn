@@ -33,6 +33,14 @@ end
 
 threads << Thread.new do
   safely do
+    @ws_manager = WebsocketManager.new
+    @ws_manager.run
+    puts "WebsocketManager stopped ..."
+  end
+end
+
+threads << Thread.new do
+  safely do
     @scheduler = HuginnScheduler.new(frequency: ENV['SCHEDULER_FREQUENCY'])
     @scheduler.run!
     puts "Scheduler stopped ..."
